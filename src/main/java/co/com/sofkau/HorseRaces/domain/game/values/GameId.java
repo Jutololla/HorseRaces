@@ -1,4 +1,4 @@
-package co.com.sofkau.HorseRaces.entities.game.values;
+package co.com.sofkau.HorseRaces.domain.game.values;
 
 import co.com.sofka.domain.generic.Identity;
 
