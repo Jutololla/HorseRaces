@@ -79,4 +79,6 @@ public class Game extends AggregateEvent<GameId> {
 
     public void prepareGame(List<PlayerId> playerIds) {appendChange(new GamePrepared((ArrayList<PlayerId>) playerIds)).apply();}
 
+    public void runRace(){appendChange(new RaceRun()).apply();}
+
 }

@@ -2,6 +2,7 @@ package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofkau.horseraces.domain.game.events.*;
+import co.com.sofkau.horseraces.domain.game.values.ActualState;
 import co.com.sofkau.horseraces.domain.game.values.LaneId;
 import co.com.sofkau.horseraces.domain.game.values.MetersRunned;
 import co.com.sofkau.horseraces.domain.game.values.PlayerId;
@@ -46,7 +47,15 @@ public class GameChange extends EventChange {
 
         apply((GamePrepared event)->{
             for (PlayerId iterable:event.getPlayerIds()) {
-                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length,new MetersRunned(0d)));
+                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length));
+            }
+            game.actualState= new ActualState("PREPARED");
+        });
+
+        apply((RaceRun event)->{
+            game.actualState= new ActualState("RUNNING");
+            for (Lane lane: game.lanes) {
+                lane.run();
             }
         });
 

@@ -60,7 +60,7 @@ class PrepareGameUseCaseTest {
     }
 
     @Test
-    @DisplayName("Test preparation with valid arguments")
+    @DisplayName("Test preparation with uncomplete arguments")
     void uncompleteData_prepareGame() {
         //arrange
         ArrayList<PlayerId> commandListPlayerId = new ArrayList<>();
