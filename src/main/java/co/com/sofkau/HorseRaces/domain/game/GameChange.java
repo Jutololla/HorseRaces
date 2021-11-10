@@ -2,10 +2,21 @@ package co.com.sofkau.HorseRaces.domain.game;
 
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofkau.HorseRaces.domain.game.events.GameCreated;
+import co.com.sofkau.HorseRaces.domain.game.events.TrackAdded;
 
 public class GameChange extends EventChange {
+
     public GameChange(Game game){
         apply((GameCreated event)->
                 game.dateTime=event.getDateTime());
+
+
+    apply((TrackAdded event) -> {
+        game.track = new Track(
+                event.getTrackId(),
+                event.getLength()
+        );
+    });
+
     }
 }
