@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const HomePage = ({children}) => (
     <section className="contentHome">
-        <h1>Welcome to the game</h1>
+        <h1>Bienvenido a la carrera de caballos</h1>
         
-        <p>choose an option</p>
+        <p>Escoja una opcion</p>
         <div>
         <Link to="/crearjugadores" className="button">
         ▶️ Crear Jugadores
@@ -20,6 +20,12 @@ const HomePage = ({children}) => (
         <div>
         <Link to="/iniciarjuego" className="button">
         ▶️ Iniciar Juego
+        </Link>
+        </div>
+
+        <div>
+        <Link to="/mejoresjugadores" className="button">
+        ▶️ Mejores Jugadores
         </Link>
         </div>
     

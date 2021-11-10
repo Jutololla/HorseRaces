@@ -3,11 +3,13 @@ const CreatePlayersPage = () => {
 
 
     const [formState, setformState] = useState({
-        horse:'CABALLO 1'
+        horse:'CABALLO 1',
+        nameplayer:''
     })
     const onSubmit = e => {
         e.preventDefault();
         const data = {...formState,
+            
             
         }
         console.log(data)
@@ -28,13 +30,13 @@ const CreatePlayersPage = () => {
             <form onSubmit={onSubmit}>
 
                 <div>
-                    <label for="nameplayer">Name Player</label>
-                    <input id="nameplayer" className="form-control" setContent={setNamePlayer}/>
+                    <label for="nameplayer" className="form-label">Name Player</label>
+                    <input id="nameplayer" name="namePlayer" className="form-control" onChange={handleInputChange}/>
                 </div>
 
                 <div>
-                    <label for="type">Caballos Disponibles</label>
-                    <select name="type" onChange={handleInputChange} id="type" className="form-select">
+                    <label for="horse" className="form-label">Caballos Disponibles</label>
+                    <select name="horse" onChange={handleInputChange} id="horse" className="form-select">
                         <option value="CABALLO 1">CABALLO 1</option>
                         <option value="CABALLO 2 ">CABALLO 2</option>
                         <option value="CABALLO 3">CABALLO 3</option>
