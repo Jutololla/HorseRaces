@@ -16,7 +16,7 @@ public class PrepareGameUseCase extends UseCase<RequestCommand<PrepareGame>, Res
         var command = prepareGameRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
 
-        if(isDataComplete(game)){
+        if(isDataComplete(game)&&game.getActualState().value().equals("IDLE")){
             game.prepareGame(command.getPlayerIds());
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         }

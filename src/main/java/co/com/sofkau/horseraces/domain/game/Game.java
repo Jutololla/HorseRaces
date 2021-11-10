@@ -2,6 +2,7 @@ package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofkau.horseraces.domain.game.commands.SetPodium;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
 public class Game extends AggregateEvent<GameId> {
     protected HashMap<String,Player> players = new HashMap<>();
     protected Track track;
-    protected Podium podium;
+    protected Podium podium = Podium.from();
     protected DateTime dateTime;
     protected ActualState   actualState;
     protected ArrayList<Lane> lanes = new ArrayList<>();
@@ -80,5 +81,7 @@ public class Game extends AggregateEvent<GameId> {
     public void prepareGame(List<PlayerId> playerIds) {appendChange(new GamePrepared((ArrayList<PlayerId>) playerIds)).apply();}
 
     public void runRace(){appendChange(new RaceRun()).apply();}
+
+    public void setPodium(){appendChange(new PodiumSet()).apply();}
 
 }
