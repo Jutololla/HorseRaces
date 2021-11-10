@@ -32,6 +32,10 @@ public class Track extends Entity<TrackId> {
         this.length = length;
     }
 
+    public boolean isValid(){
+        return !(length.value().isInfinite()||length.value().isNaN()||length.value()<=0);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

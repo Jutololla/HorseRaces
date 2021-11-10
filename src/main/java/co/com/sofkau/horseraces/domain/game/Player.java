@@ -2,7 +2,6 @@ package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.Entity;
 import co.com.sofkau.horseraces.domain.game.values.HorseId;
-import co.com.sofkau.horseraces.domain.game.values.Lane;
 import co.com.sofkau.horseraces.domain.game.values.Name;
 import co.com.sofkau.horseraces.domain.game.values.PlayerId;
 

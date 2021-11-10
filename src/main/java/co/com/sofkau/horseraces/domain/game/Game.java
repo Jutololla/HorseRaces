@@ -12,6 +12,8 @@ public class Game extends AggregateEvent<GameId> {
     protected Track track;
     protected Podium podium;
     protected DateTime dateTime;
+    protected ActualState   actualState;
+    protected ArrayList<Lane> lanes = new ArrayList<>();
     protected HashSet<Horse> horses = new HashSet<>();
 
 
@@ -35,6 +37,34 @@ public class Game extends AggregateEvent<GameId> {
         return dateTime;
     }
 
+    public HashMap<String, Player> getPlayers() {
+        return players;
+    }
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public Podium getPodium() {
+        return podium;
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public ActualState getActualState() {
+        return actualState;
+    }
+
+    public ArrayList<Lane> getLanes() {
+        return lanes;
+    }
+
+    public HashSet<Horse> getHorses() {
+        return horses;
+    }
+
     public void addTrack(TrackId trackId, Length length)    {
         appendChange(new TrackAdded(trackId,length)).apply();
     }
@@ -46,4 +76,7 @@ public class Game extends AggregateEvent<GameId> {
     public void createPlayer(PlayerId playerId, Name name){ appendChange(new PlayerCreated(playerId,name)).apply();}
 
     public void chooseHorse(HorseId horseId, PlayerId playerId) {appendChange(new HorseChosen(horseId,playerId)).apply();}
+
+    public void prepareGame(List<PlayerId> playerIds) {appendChange(new GamePrepared((ArrayList<PlayerId>) playerIds)).apply();}
+
 }

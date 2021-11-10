@@ -2,6 +2,8 @@ package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofkau.horseraces.domain.game.events.*;
+import co.com.sofkau.horseraces.domain.game.values.LaneId;
+import co.com.sofkau.horseraces.domain.game.values.MetersRunned;
 import co.com.sofkau.horseraces.domain.game.values.PlayerId;
 
 public class GameChange extends EventChange {
@@ -39,6 +41,12 @@ public class GameChange extends EventChange {
                         .setHorseId(event.getHorseId());
             } else {
                 throw new NullPointerException("The referenced player doesn't exist");
+            }
+        });
+
+        apply((GamePrepared event)->{
+            for (PlayerId iterable:event.getPlayerIds()) {
+                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length,new MetersRunned(0d)));
             }
         });
 
