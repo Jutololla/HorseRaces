@@ -14,6 +14,7 @@ import StartGamePage from './pages/StartGamePage'
 import bestPlayerPage from './pages/BestPlayerPage'
 import Footer from "./components/Footer"
 import Header from './components/Header'
+import StartPage from './pages/StartPage'
 
 const App = ({ dispatch }) => {
   return(
@@ -29,6 +30,7 @@ const App = ({ dispatch }) => {
       <Route exact path="/configurarjuego" component={ConfigurarJuegoPage} />
       <Route exact path="/iniciarjuego" component={StartGamePage} />
       <Route exact path="/mejoresjugadores" component={bestPlayerPage} />
+      <Route exact path="/start" component={StartPage} />
       <Redirect to="/"/>
     </Switch>
 

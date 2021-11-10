@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 //import { fetchQuestions } from '../actions/questionActions'
 import { Player } from '../components/Player'
 
-const QuestionsPage = ({ dispatch, loading, hasErrors }) => {
+const BestPlayerPage = ({ dispatch, loading, hasErrors }) => {
     useEffect(() => {
         //dispatch(fetchQuestions())
     }, [dispatch])
@@ -56,4 +56,4 @@ const mapStateToProps = state => ({
     hasErrors: state.question.hasErrors,
 })
 
-export default QuestionsPage
+export default BestPlayerPage
