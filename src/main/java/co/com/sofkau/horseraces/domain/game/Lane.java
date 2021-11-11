@@ -11,6 +11,7 @@ public class Lane extends Entity<LaneId> {
     protected Length length;
     protected ArrayList<MetersRunned> metersRunned = new ArrayList<>();
     protected Speed speed;
+    protected LaneNumber laneNumber;
 
     private Lane(LaneId entityId) {
         super(entityId);
@@ -22,10 +23,11 @@ public class Lane extends Entity<LaneId> {
         this.length = length;
     }
 
-    public static Lane from (LaneId entityId, PlayerId playerId, Length length) {
+    public static Lane from (LaneId entityId, PlayerId playerId, Length length, LaneNumber laneNumber) {
         var lane = new Lane(entityId);
         lane.playerId=playerId;
         lane.length=length;
+        lane.laneNumber=laneNumber;
         return lane;
     }
 

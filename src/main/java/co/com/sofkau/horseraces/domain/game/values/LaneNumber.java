@@ -4,22 +4,22 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class ThirdPlace implements ValueObject<Integer> {
-    private final Integer value;
+public class LaneNumber implements ValueObject<String> {
+    private final String value;
 
-    public ThirdPlace(Integer value) {
+    public LaneNumber(String value) {
         this.value = Objects.requireNonNull(value);
     }
 
-    public Integer value() {
+    public String value() {
         return value;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ThirdPlace)) return false;
-        ThirdPlace that = (ThirdPlace) o;
+        if (!(o instanceof LaneNumber)) return false;
+        LaneNumber that = (LaneNumber) o;
         return Objects.equals(value, that.value);
     }
 
