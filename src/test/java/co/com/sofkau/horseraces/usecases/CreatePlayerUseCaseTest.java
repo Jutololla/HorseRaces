@@ -4,12 +4,11 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.CreateHorse;
 import co.com.sofkau.horseraces.domain.game.commands.CreatePlayer;
 import co.com.sofkau.horseraces.domain.game.events.GameCreated;
-import co.com.sofkau.horseraces.domain.game.events.HorseCreated;
 import co.com.sofkau.horseraces.domain.game.events.PlayerCreated;
 import co.com.sofkau.horseraces.domain.game.values.*;
+import co.com.sofkau.horseraces.usecases.game.commands.CreatePlayerUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CreatePlayerUseCaseTest {

@@ -1,14 +1,13 @@
 package co.com.sofkau.horseraces.usecases;
 
-import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.ChooseHorse;
 import co.com.sofkau.horseraces.domain.game.commands.PrepareGame;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
+import co.com.sofkau.horseraces.usecases.game.commands.PrepareGameUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

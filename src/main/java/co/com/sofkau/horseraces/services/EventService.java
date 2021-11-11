@@ -4,9 +4,8 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofkau.horseraces.domain.game.commands.CreateGame;
 import co.com.sofkau.horseraces.domain.game.commands.CreateHorse;
-import co.com.sofkau.horseraces.usecases.CreateGameUseCase;
-import co.com.sofkau.horseraces.usecases.CreateHorseUseCase;
-import org.springframework.beans.factory.annotation.Autowired;
+import co.com.sofkau.horseraces.usecases.game.commands.CreateGameUseCase;
+import co.com.sofkau.horseraces.usecases.game.commands.CreateHorseUseCase;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -8,6 +8,7 @@ import co.com.sofkau.horseraces.domain.game.commands.CreateHorse;
 import co.com.sofkau.horseraces.domain.game.events.GameCreated;
 import co.com.sofkau.horseraces.domain.game.events.HorseCreated;
 import co.com.sofkau.horseraces.domain.game.values.*;
+import co.com.sofkau.horseraces.usecases.game.commands.CreateHorseUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

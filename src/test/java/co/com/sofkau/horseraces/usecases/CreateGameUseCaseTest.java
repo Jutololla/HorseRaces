@@ -6,6 +6,7 @@ import co.com.sofkau.horseraces.domain.game.commands.CreateGame;
 import co.com.sofkau.horseraces.domain.game.events.GameCreated;
 import co.com.sofkau.horseraces.domain.game.values.DateTime;
 import co.com.sofkau.horseraces.domain.game.values.GameId;
+import co.com.sofkau.horseraces.usecases.game.commands.CreateGameUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

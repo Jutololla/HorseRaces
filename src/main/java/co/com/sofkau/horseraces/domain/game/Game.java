@@ -24,7 +24,7 @@ public class Game extends AggregateEvent<GameId> {
 
     private Game(GameId gameId){
         super(gameId);
-        subscribe(new GameChange(this));
+        subscribe(new GameBehavior(this));
     }
 
     public static Game from(GameId gameId, List<DomainEvent> events){

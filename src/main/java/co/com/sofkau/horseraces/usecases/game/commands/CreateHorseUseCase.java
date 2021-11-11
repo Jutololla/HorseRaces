@@ -1,4 +1,4 @@
-package co.com.sofkau.horseraces.usecases;
+package co.com.sofkau.horseraces.usecases.game.commands;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
@@ -13,7 +13,7 @@ public class CreateHorseUseCase extends UseCase<RequestCommand<CreateHorse>, Res
     @Override
     public void executeUseCase(RequestCommand<CreateHorse> createHorseRequestCommand) {
         var command = createHorseRequestCommand.getCommand();
-        var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
+        var game = Game.from(command.getGameId(), retrieveEvents(command.getHorseId().value()));
 
         if (game.getActualState().value().equals("IDLE")) {
             game.createHorse(command.getHorseId(), command.getName());

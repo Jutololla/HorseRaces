@@ -1,4 +1,4 @@
-package co.com.sofkau.horseraces.usecases;
+package co.com.sofkau.horseraces.usecases.game.commands;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;

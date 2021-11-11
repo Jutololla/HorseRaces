@@ -11,6 +11,7 @@ import co.com.sofkau.horseraces.domain.game.values.DateTime;
 import co.com.sofkau.horseraces.domain.game.values.GameId;
 import co.com.sofkau.horseraces.domain.game.values.Length;
 import co.com.sofkau.horseraces.domain.game.values.TrackId;
+import co.com.sofkau.horseraces.usecases.game.commands.AddTrackUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

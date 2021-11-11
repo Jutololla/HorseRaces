@@ -4,11 +4,10 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.PrepareGame;
 import co.com.sofkau.horseraces.domain.game.commands.RunRace;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
-import org.junit.jupiter.api.Assertions;
+import co.com.sofkau.horseraces.usecases.game.commands.RunRaceUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class RunRaceUseCaseTest {

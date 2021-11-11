@@ -5,9 +5,9 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofkau.horseraces.domain.game.commands.CleanLanesAndPodium;
-import co.com.sofkau.horseraces.domain.game.commands.DoRematch;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
+import co.com.sofkau.horseraces.usecases.game.commands.CleanLanesAndPodiumUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CleanLanesAndPodiumUseCaseTest {

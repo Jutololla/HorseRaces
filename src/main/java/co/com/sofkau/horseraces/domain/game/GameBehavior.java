@@ -8,9 +8,9 @@ import co.com.sofkau.horseraces.domain.game.values.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GameChange extends EventChange {
+public class GameBehavior extends EventChange {
 
-    public GameChange(Game game) {
+    public GameBehavior(Game game) {
         apply((GameCreated event) -> {
             game.dateTime = event.getDateTime();
             game.actualState= new ActualState("IDLE");

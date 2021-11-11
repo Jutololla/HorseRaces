@@ -1,23 +1,20 @@
-package co.com.sofkau.horseraces.usecases;
+package co.com.sofkau.horseraces.usecases.game.commands;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
-import co.com.sofkau.horseraces.domain.game.commands.DoRematch;
+import co.com.sofkau.horseraces.domain.game.commands.CleanLanesAndPodium;
 
-public class DoRematchUseCase extends UseCase<RequestCommand<DoRematch>, ResponseEvents> {
-
-
+public class CleanLanesAndPodiumUseCase extends UseCase<RequestCommand<CleanLanesAndPodium>, ResponseEvents> {
     @Override
-    public void executeUseCase(RequestCommand<DoRematch> doRematchRequestCommand) {
-        var command = doRematchRequestCommand.getCommand();
+    public void executeUseCase(RequestCommand<CleanLanesAndPodium> doCleanRequestCommand) {
+        var command = doCleanRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
 
         if (game.getActualState().value().equals("FINISHED")) {
-            game.doRematch();
-            game.setPodium();
+            game.cleanLanesAndPodium();
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         } else {
             emit().onError(new BusinessException(game.identity().value(),
@@ -25,4 +22,3 @@ public class DoRematchUseCase extends UseCase<RequestCommand<DoRematch>, Respons
         }
     }
 }
-
