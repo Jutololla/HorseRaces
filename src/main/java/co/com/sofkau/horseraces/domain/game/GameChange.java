@@ -3,10 +3,7 @@ package co.com.sofkau.horseraces.domain.game;
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.utils.LaneComparator;
-import co.com.sofkau.horseraces.domain.game.values.ActualState;
-import co.com.sofkau.horseraces.domain.game.values.LaneId;
-import co.com.sofkau.horseraces.domain.game.values.MetersRunned;
-import co.com.sofkau.horseraces.domain.game.values.PlayerId;
+import co.com.sofkau.horseraces.domain.game.values.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,7 +74,28 @@ public class GameChange extends EventChange {
             game.podium.setThirdPlace(game.lanes.get(2).playerId);
         });
 
+        apply((RematchDone event)->{
+            game.actualState= new ActualState("RUNNING");
+            cleanVariables(game);
+            for (Lane lane: game.lanes) {
+                lane.run();
+            }
+        });
+
+        apply((LanesAndPodiumCleaned event)->{
+            game.actualState= new ActualState("IDLE");
+            cleanVariables(game);
+        });
 
 
+
+    }
+
+    private void cleanVariables(Game game) {
+        for (Lane lane : game.lanes) {
+            lane.metersRunned.clear();
+            lane.setSpeed(new Speed(0d));
+        }
+        game.podium = Podium.from();
     }
 }

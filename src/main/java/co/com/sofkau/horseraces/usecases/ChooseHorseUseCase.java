@@ -1,5 +1,6 @@
 package co.com.sofkau.horseraces.usecases;
 
+import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
@@ -11,8 +12,12 @@ public class ChooseHorseUseCase extends UseCase<RequestCommand<ChooseHorse>, Res
     public void executeUseCase(RequestCommand<ChooseHorse> chooseHorseRequestCommand) {
         var command = chooseHorseRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
-
-        game.chooseHorse(command.getHorseId(), command.getPlayerId());
-        emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
+        if (game.getActualState().value().equals("IDLE")) {
+            game.chooseHorse(command.getHorseId(), command.getPlayerId());
+            emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
+        } else {
+            emit().onError(new BusinessException(game.identity().value(),
+                    "The game state is not idle"));
+        }
     }
 }

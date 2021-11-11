@@ -13,6 +13,16 @@ public class CreateGame extends Command {
         this.dateTime = dateTime;
     }
 
+    public CreateGame(GameId gameId) {
+        this.gameId = gameId;
+        this.dateTime = new DateTime();
+    }
+
+    public CreateGame() {
+        this.gameId = new GameId();
+        this.dateTime = new DateTime();
+    }
+
     public GameId getGameId() {
         return gameId;
     }

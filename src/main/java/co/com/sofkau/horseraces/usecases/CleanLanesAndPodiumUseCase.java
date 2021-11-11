@@ -5,17 +5,16 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
-import co.com.sofkau.horseraces.domain.game.commands.AddTrack;
+import co.com.sofkau.horseraces.domain.game.commands.CleanLanesAndPodium;
 
-public class AddTrackUseCase extends UseCase<RequestCommand<AddTrack>, ResponseEvents> {
-
+public class CleanLanesAndPodiumUseCase extends UseCase<RequestCommand<CleanLanesAndPodium>, ResponseEvents> {
     @Override
-    public void executeUseCase(RequestCommand<AddTrack> addTrackRequestCommand) {
-        var command = addTrackRequestCommand.getCommand();
+    public void executeUseCase(RequestCommand<CleanLanesAndPodium> doCleanRequestCommand) {
+        var command = doCleanRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
 
-        if (game.getActualState().value().equals("IDLE")) {
-            game.addTrack(command.getTrackId(), command.getLength());
+        if (game.getActualState().value().equals("FINISHED")) {
+            game.cleanLanesAndPodium();
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         } else {
             emit().onError(new BusinessException(game.identity().value(),

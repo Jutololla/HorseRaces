@@ -2,7 +2,6 @@ package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.SetPodium;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
 
@@ -83,5 +82,9 @@ public class Game extends AggregateEvent<GameId> {
     public void runRace(){appendChange(new RaceRun()).apply();}
 
     public void setPodium(){appendChange(new PodiumSet()).apply();}
+
+    public void doRematch(){appendChange(new RematchDone()).apply();}
+
+    public void cleanLanesAndPodium(){appendChange(new LanesAndPodiumCleaned()).apply();}
 
 }
