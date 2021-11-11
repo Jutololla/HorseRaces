@@ -156,3 +156,6 @@ textarea {
   color: #732002;
   padding: 5px;
 }
+canvas {
+  border: 1px solid black;
+}
