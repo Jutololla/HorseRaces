@@ -1,5 +1,6 @@
 package co.com.sofkau.horseraces.usecases;
 
+import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
@@ -13,7 +14,12 @@ public class CreatePlayerUseCase extends UseCase<RequestCommand<CreatePlayer>, R
         var command = createPlayerRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
 
-        game.createPlayer(command.getPlayerId(),command.getName());
-        emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
+        if (game.getActualState().value().equals("FINISHED")) {
+            game.createPlayer(command.getPlayerId(),command.getName());
+            emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
+        } else {
+            emit().onError(new BusinessException(game.identity().value(),
+                    "The game has not finished"));
+        }
     }
 }

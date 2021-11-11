@@ -4,11 +4,10 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.PrepareGame;
+import co.com.sofkau.horseraces.domain.game.commands.DoRematch;
 import co.com.sofkau.horseraces.domain.game.commands.RunRace;
 import co.com.sofkau.horseraces.domain.game.events.*;
 import co.com.sofkau.horseraces.domain.game.values.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,21 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
-class RunRaceUseCaseTest {
-
+class DoRematchUseCaseTest {
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    @DisplayName("Test preparation with valid arguments")
-    void validArguments_runRace() {
+    @DisplayName("Test rematch with valid arguments")
+    void validArguments_doRematch() {
         //arrange
-        var command = new RunRace(
+        var command = new DoRematch(
                 new GameId("Game001"));
 
-        var useCase = new RunRaceUseCase();
+        var useCase = new DoRematchUseCase();
         Mockito.when(repository.getEventsBy(command.getGameId().value())).thenReturn(EventRestore());
         useCase.addRepository(repository);
 
@@ -44,7 +41,7 @@ class RunRaceUseCaseTest {
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
-        var event = (RaceRun) events.get(0);
+        var event = (RematchDone) events.get(0);
 
         //Assert
 
@@ -69,7 +66,10 @@ class RunRaceUseCaseTest {
                 new HorseChosen(new HorseId("Horse2"), new PlayerId("Player2")),
                 new HorseChosen(new HorseId("Horse1"), new PlayerId("Player3")),
                 new HorseChosen(new HorseId("Horse2"), new PlayerId("Player4")),
-                new GamePrepared(playersIds));
+                new GamePrepared(playersIds),
+                new RaceRun(),
+                new PodiumSet());
     }
+
 
 }

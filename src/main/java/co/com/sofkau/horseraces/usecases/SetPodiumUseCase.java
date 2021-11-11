@@ -5,21 +5,21 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
-import co.com.sofkau.horseraces.domain.game.commands.AddTrack;
+import co.com.sofkau.horseraces.domain.game.commands.SetPodium;
 
-public class AddTrackUseCase extends UseCase<RequestCommand<AddTrack>, ResponseEvents> {
-
+public class SetPodiumUseCase extends UseCase<RequestCommand<SetPodium>, ResponseEvents> {
     @Override
-    public void executeUseCase(RequestCommand<AddTrack> addTrackRequestCommand) {
-        var command = addTrackRequestCommand.getCommand();
+    public void executeUseCase(RequestCommand<SetPodium> setPodiumRequestCommand) {
+        var command = setPodiumRequestCommand.getCommand();
         var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
 
-        if (game.getActualState().value().equals("IDLE")) {
-            game.addTrack(command.getTrackId(), command.getLength());
+        if(game.getActualState().value().equals("RUNNING")){
+            game.setPodium();
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
-        } else {
+        }
+        else {
             emit().onError(new BusinessException(game.identity().value(),
-                    "The game has not finished"));
+                    "The game actualState is not RUNNING"));
         }
     }
 }

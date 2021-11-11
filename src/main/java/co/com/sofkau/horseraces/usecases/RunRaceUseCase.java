@@ -16,6 +16,7 @@ public class RunRaceUseCase extends UseCase<RequestCommand<RunRace>, ResponseEve
 
         if(game.getActualState().value().equals("PREPARED")){
             game.runRace();
+            game.setPodium();
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         }
         else {
