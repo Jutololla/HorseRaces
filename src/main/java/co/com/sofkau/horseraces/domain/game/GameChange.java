@@ -53,8 +53,10 @@ public class GameChange extends EventChange {
         });
 
         apply((GamePrepared event)->{
+            int counter = 1;
             for (PlayerId iterable:event.getPlayerIds()) {
-                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length));
+                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length,new LaneNumber(String.valueOf(counter))));
+                counter+=1;
             }
             game.actualState= new ActualState("PREPARED");
         });
@@ -72,11 +74,14 @@ public class GameChange extends EventChange {
             game.podium.setFirstPlace(game.lanes.get(0).playerId);
             game.podium.setSecondPlace(game.lanes.get(1).playerId);
             game.podium.setThirdPlace(game.lanes.get(2).playerId);
+            game.players.get(game.podium.getFirstPlace().value()).addFirstPlaceVictory();
+            game.players.get(game.podium.getSecondPlace().value()).addSecondPlaceVictory();
+            game.players.get(game.podium.getThirdPlace().value()).addThirdPlaceVictory();
         });
 
         apply((RematchDone event)->{
             game.actualState= new ActualState("RUNNING");
-            cleanVariables(game);
+            cleanVariables(game,false);
             for (Lane lane: game.lanes) {
                 lane.run();
             }
@@ -84,15 +89,17 @@ public class GameChange extends EventChange {
 
         apply((LanesAndPodiumCleaned event)->{
             game.actualState= new ActualState("IDLE");
-            cleanVariables(game);
+            cleanVariables(game,true);
         });
 
 
 
     }
 
-    private void cleanVariables(Game game) {
+    private void cleanVariables(Game game, Boolean cleanHorses) {
         for (Lane lane : game.lanes) {
+            if(cleanHorses){
+            game.players.get(lane.playerId.value()).setHorseId(null);}
             lane.metersRunned.clear();
             lane.setSpeed(new Speed(0d));
         }
