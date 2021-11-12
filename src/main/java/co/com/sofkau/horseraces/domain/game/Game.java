@@ -1,90 +1,63 @@
 package co.com.sofkau.horseraces.domain.game;
 
-import co.com.sofka.domain.generic.AggregateEvent;
-import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.events.*;
-import co.com.sofkau.horseraces.domain.game.values.*;
+import co.com.sofka.business.generic.BusinessException;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Game extends AggregateEvent<GameId> {
-    protected HashMap<String,Player> players = new HashMap<>();
-    protected Track track;
-    protected Podium podium = Podium.from();
-    protected DateTime dateTime;
-    protected ActualState   actualState;
+@Getter
+@Setter
+@Document("game")
+public class Game {
+    @Id
+    protected String gameId;
+    protected Double track;
+    protected String   actualState;
     protected ArrayList<Lane> lanes = new ArrayList<>();
-    protected HashSet<Horse> horses = new HashSet<>();
 
 
-    public Game(GameId entityId, DateTime dateTime) {
-        super(entityId);
-        appendChange(new GameCreated(entityId, dateTime)).apply();
+    public Game() {
+        this.actualState = "IDLE";
     }
 
-    private Game(GameId gameId){
-        super(gameId);
-        subscribe(new GameChange(this));
+    public Game(String gameId) {
+        this.gameId = gameId;
+        this.actualState = "IDLE";
     }
 
-    public static Game from(GameId gameId, List<DomainEvent> events){
-        var game = new Game(gameId);
-        events.forEach(game::applyEvent);
-        return game;
+    public void setTrack(Double track) throws Exception {
+        if(!(track.isInfinite()|| track.isNaN()||track<2000)) {
+            this.track = track;
+        }
+        else{
+            throw new Exception("the track length must be a valid value greater than 2000");
+        }
     }
 
-    public DateTime DateTime() {
-        return dateTime;
-    }
-
-    public HashMap<String, Player> getPlayers() {
-        return players;
-    }
-
-    public Track getTrack() {
-        return track;
-    }
-
-    public Podium getPodium() {
-        return podium;
-    }
-
-    public DateTime getDateTime() {
-        return dateTime;
-    }
-
-    public ActualState getActualState() {
-        return actualState;
-    }
-
-    public ArrayList<Lane> getLanes() {
-        return lanes;
-    }
-
-    public HashSet<Horse> getHorses() {
-        return horses;
-    }
-
-    public void addTrack(TrackId trackId, Length length)    {
-        appendChange(new TrackAdded(trackId,length)).apply();
-    }
-
-    public void createHorse(HorseId horseId, Name name){
-        appendChange(new HorseCreated(horseId, name)).apply();
-    }
-
-    public void createPlayer(PlayerId playerId, Name name){ appendChange(new PlayerCreated(playerId,name)).apply();}
-
-    public void chooseHorse(HorseId horseId, PlayerId playerId) {appendChange(new HorseChosen(horseId,playerId)).apply();}
-
-    public void prepareGame(List<PlayerId> playerIds) {appendChange(new GamePrepared((ArrayList<PlayerId>) playerIds)).apply();}
-
-    public void runRace(){appendChange(new RaceRun()).apply();}
-
-    public void setPodium(){appendChange(new PodiumSet()).apply();}
-
-    public void doRematch(){appendChange(new RematchDone()).apply();}
-
-    public void cleanLanesAndPodium(){appendChange(new LanesAndPodiumCleaned()).apply();}
+    //    public void addTrack(TrackId trackId, Length length)    {
+//        appendChange(new TrackAdded(trackId,length)).apply();
+//    }
+//
+//    public void createHorse(HorseId horseId, Name name){
+//        appendChange(new HorseCreated(horseId, name)).apply();
+//    }
+//
+//    public void createPlayer(PlayerId playerId, Name name){ appendChange(new PlayerCreated(playerId,name)).apply();}
+//
+//    public void chooseHorse(HorseId horseId, PlayerId playerId) {appendChange(new HorseChosen(horseId,playerId)).apply();}
+//
+//    public void prepareGame(List<PlayerId> playerIds) {appendChange(new GamePrepared((ArrayList<PlayerId>) playerIds)).apply();}
+//
+//    public void runRace(){appendChange(new RaceRun()).apply();}
+//
+//    public void setPodium(){appendChange(new PodiumSet()).apply();}
+//
+//    public void doRematch(){appendChange(new RematchDone()).apply();}
+//
+//    public void cleanLanesAndPodium(){appendChange(new LanesAndPodiumCleaned()).apply();}
 
 }
