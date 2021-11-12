@@ -14,21 +14,22 @@ const PlayerDelete = ({e}) => {
 export const Player = ({ player, excerpt, onDelete }) => (
     <tr>
         
-        <td>{player.id}</td>
-        <td>{player.nombre}</td>
-        <td>@mdo</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
+        <td>{player.playerId}</td>
+        <td>{player.name}</td>
+        <td>{player.firstPlacePodiumId.length}</td>
+        <td>{player.secondPlacePodiumId.length}</td>
+        <td>{player.thirdPlacePodiumId.length}</td>
+        <td>{player.firstPlacePodiumId.length+player.secondPlacePodiumId+player.thirdPlacePodiumId.length}</td>
     </tr>
 )
 
 export const PlayerGame = ({ player, excerpt, onDelete }) => (
     <tr>
         
-        <td>{player.id}</td>
-        <td>{player.nombre}</td>
+        <td>{player.playerId}</td>
+        <td>{player.name}</td>
         <td><button type="button" className="btn btn-success" onClick={PlayerUpdate} id={player.id}>Update</button></td>
         <td><button type="button" className="btn btn-danger" onClick={PlayerDelete} >Delete</button></td>
+        
     </tr>
 )

@@ -1,4 +1,4 @@
-const URL_BASE = 'http://localhost:8080';
+const URL_BASE = 'http://localhost:8080/api';
 export const LOADING = 'LOADING'
 export const LOADED_SUCCESS = 'LOADED_SUCCESS'
 export const LOADED_FAILURE = 'LOADED_FAILURE'
@@ -103,18 +103,12 @@ export function fetchHorses(game) {
     }
 }
 
-export function fetchPlayers(game) {
+export function fetchPlayers() {
     return async dispatch => {
         dispatch(loading())
         try {
             const response = await fetch(
-                `${URL_BASE}/Players`,
-                {method: 'POST',
-                        mode: 'cors',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(game)}
+                `${URL_BASE}/getplayers`
                 )
             const data = await response.json()
             dispatch(success({ players: data, redirect: null }))

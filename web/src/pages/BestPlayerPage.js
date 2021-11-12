@@ -1,30 +1,23 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { fetchPlayers } from '../actions/gameActions'
 
 //import { fetchQuestions } from '../actions/questionActions'
 import { Player } from '../components/Player'
 
-const BestPlayerPage = ({ dispatch, loading, hasErrors }) => {
+const BestPlayerPage = ({ dispatch, loading, hasErrors,players}) => {
     useEffect(() => {
-        //dispatch(fetchQuestions())
+        dispatch(fetchPlayers())
     }, [dispatch])
     
-    let player=[
-        {
-            id:1,
-            nombre:"yhomi"
-        },
-        {
-            id:2,
-            nombre:"alexandra"
-        }
-    ]
-    const renderQuestions = () => {
+    const renderPlayers = () => {
         if (loading) return <p>Loading player...</p>
         if (hasErrors) return <p>Unable to display player.</p>
 
         //return questions.map(question => <Question key={question.id} question={question} excerpt />)
-        return player.map(player => <Player player={player}/>)
+        console.log(players)
+        return players.map(player => <Player player={player}/>)
+
     }
 
     return (
@@ -34,15 +27,15 @@ const BestPlayerPage = ({ dispatch, loading, hasErrors }) => {
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">First Place</th>
-                <th scope="col">Second Place</th>
-                <th scope="col">three Place</th>
+                <th scope="col">Primer Puesto</th>
+                <th scope="col">Segundo Puesto</th>
+                <th scope="col">Tercer Puesto</th>
+                <th scope="col">Total</th>
                 <th scope="col">Total</th>
                 </tr>
             </thead>
     <tbody>
-    {renderQuestions()}
+    {renderPlayers()}
     </tbody>
     </table>
             
@@ -51,9 +44,10 @@ const BestPlayerPage = ({ dispatch, loading, hasErrors }) => {
 }
 
 const mapStateToProps = state => ({
-    loading: state.question.loading,
-    questions: state.question.questions,
-    hasErrors: state.question.hasErrors,
+    loading: state.game.loading,
+    hasErrors: state.game.hasErrors,
+    players: state.game.players,
+
 })
 
-export default BestPlayerPage
+export default connect(mapStateToProps)(BestPlayerPage)
