@@ -4,6 +4,7 @@ import l3 from '../medalla-de-bronce.png'
 const PodioPage=()=>{
     return(
         <section>
+        <h1>Podio</h1>
             <label htmlFor="">primer</label>
             <img src={l1} alt="m1" />
             <label htmlFor="">segundo</label>

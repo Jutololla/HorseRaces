@@ -12,20 +12,190 @@ export const success = payload => ({
 
 export const failure = () => ({ type: LOADED_FAILURE })
 
-export function fetchQuestions() {
+
+
+export function postGame(game) {
     return async dispatch => {
         dispatch(loading())
         try {
-            const response = await fetch(
-                `${URL_BASE}/getAll`
+            const response = await fetch(`${URL_BASE}/createGame`,
+                {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(game)
+                }
             )
-            const data = await response.json()
-            dispatch(success({ questions: data, redirect: null }))
+            const id = await response.text()
+            //dispatch(success({redirect: `/question/${id}`}));
+            dispatch(success({redirect: `/${id}`}));
         } catch (error) {
             dispatch(failure())
         }
     }
 }
+
+export function postPlayer(player) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/CreatePlayer`,
+                {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(player)
+                }
+            )            
+            const data = await response.json()
+            dispatch(success({ players: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+export function postChooseHorse(data) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/ChooseHorse`,
+                {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+            )
+            const id = await response.text()
+            //dispatch(success({redirect: `/question/${id}`}));
+            dispatch(success({redirect: `/crearjugadores`}));
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+
+
+export function fetchHorses(game) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/Horses`,
+            {method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(game)}
+            )
+            const data = await response.json()
+            dispatch(success({ horses: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+export function fetchPlayers(game) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(
+                `${URL_BASE}/Players`,
+                {method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(game)}
+                )
+            const data = await response.json()
+            dispatch(success({ players: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+export function postSettingRace(game) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(
+                `${URL_BASE}/AddTrack`,
+                {method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(game)}
+                )
+            const data = await response.json()
+            //dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+export function postSettingGame(game) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(
+                `${URL_BASE}/PrepareGame`,
+                {method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(game)}
+                )
+            const data = await response.json()
+            //dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+export function postrun(game) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(
+                `${URL_BASE}/RunRace`,
+                {method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(game)}
+                )
+            const data = await response.json()
+            //dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 export function fetchOwnerQuestions(userId) {
     return async dispatch => {

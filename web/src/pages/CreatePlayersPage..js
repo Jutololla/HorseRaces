@@ -25,13 +25,13 @@ const CreatePlayersPage = () => {
     const [namePlayer, setNamePlayer] = useState('');
     return(
         <section>
-            <h1>New Player</h1>
+            <h1>Crear jugadores</h1>
 
             <form onSubmit={onSubmit}>
 
                 <div>
-                    <label for="nameplayer" className="form-label">Name Player</label>
-                    <input id="nameplayer" name="namePlayer" className="form-control" onChange={handleInputChange}/>
+                    <label for="nameplayer" className="form-label">Nombre de jugador</label>
+                    <input id="nameplayer" name="namePlayer" className="form-control" onChange={handleInputChange} placeholder="Escriba el nombre del jugador"/>
                 </div>
 
                 <div>
@@ -46,7 +46,7 @@ const CreatePlayersPage = () => {
                 
 
                 <button type="submit" className="btn btn-success">
-                    Save
+                    Guardar
                 </button>
             </form>
         </section>

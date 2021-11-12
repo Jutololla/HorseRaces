@@ -21,33 +21,24 @@ const SettingGamePage = () => {
         });
     }
     return(<section>
-        <h1>Setting Game</h1>
+        <h1>Configuracion del Juego</h1>
 
         <form onSubmit={onSubmit}>
 
             <div >
-                <label for="track" className="form-label">Track size</label>
-                <input id="track" name="track" type="number" placeholder="track in KM" className="form-control" onChange={handleInputChange} />
+                <label for="track" className="form-label">Tamaño de pista</label>
+                <input id="track" name="track" type="number" min="1" max="10"  placeholder="Escriba el tamaño de la pista" className="form-control" onChange={handleInputChange} />
                 
             </div>
 
             <div >
-                <label for="players" className="form-label">Number of players</label>
+                <label for="players" className="form-label">Numero de jugadores</label>
                 <input id="players" name="players" type="number" min="3" max="10" className="form-control" onChange={handleInputChange} />
                 
-            </div>
-
-            <div>
-                    <label for="autoplay" className="form-label">Autoplay</label>
-                    <select name="autoplay" onChange={handleInputChange} id="autoplay" className="form-select">
-                        <option value={true}>SI</option>
-                        <option value={false}>NO</option>
-                    </select>
-                </div>
-            
+            </div>       
             
             <button type="submit" className="btn btn-success">
-                Save
+                Guardar
             </button>
         </form>
     </section>)

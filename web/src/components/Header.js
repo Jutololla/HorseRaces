@@ -1,9 +1,8 @@
 import React from 'react'
 
-
 const Header = () => (
     <header className="header">
-        <h1>Horce Race Game</h1>
+     <h1>Juego de carrera de caballos</h1>
     </header>
 )
 

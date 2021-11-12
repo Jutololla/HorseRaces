@@ -29,7 +29,7 @@ const BestPlayerPage = ({ dispatch, loading, hasErrors }) => {
 
     return (
         <section>
-            <h1>The Best Players</h1>
+            <h1>Lista de mejores jugadores</h1>
             <table className="table table-striped">
             <thead>
                 <tr>

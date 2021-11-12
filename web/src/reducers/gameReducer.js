@@ -1,14 +1,18 @@
 import * as actions from '../actions/gameActions.js'
 
 export const initialState = {
+    idgame:null,
+    players: [],
+    playersgame:[],
+    horses: [],
+    speedes:[],
+    tracklength:1,
     loading: true,
     hasErrors: false,
-    gamers: [],
-    horses: [],
     redirect: null,
 };
 
-export default function questionsReducer(state = initialState, action) {
+export default function gamereducer(state = initialState, action) {
     switch (action.type) {
         case actions.LOADING:
         return { ...state, loading: true }

@@ -22,7 +22,7 @@ const App = ({ dispatch }) => {
     <>
     <Header></Header>
     <Router>
-    <PublicNavbar></PublicNavbar>
+    
     <Switch>
       <Route exact path="/" component={() => {
                 return <HomePage></HomePage>
@@ -38,7 +38,7 @@ const App = ({ dispatch }) => {
 
     </Router>
 
-    <Footer></Footer>
+    
 
 
     </>

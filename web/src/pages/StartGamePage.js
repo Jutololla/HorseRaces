@@ -34,12 +34,12 @@ const StartGamePage = ({ dispatch, loading, hasErrors }) => {
 
     return (
         <section>
-            <h1>The Players in Game</h1>
+            <h1>Seleccionar Jugadores para el juego</h1>
             <table className="table table-striped">
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
+                <th scope="col">Nombre</th>
                 <th scope="col">Update Name</th>
                 <th scope="col">Delete Player</th>
                 </tr>
