@@ -1,7 +1,5 @@
 package co.com.sofkau.horseraces.domain.game;
 
-import co.com.sofka.domain.generic.Entity;
-import co.com.sofkau.horseraces.domain.game.values.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +19,7 @@ public class Player{
     protected String playerId;
     protected String name;
     protected String horseId;
+    protected String horseMod;
     protected Lane lane;
     protected ArrayList<String> firstPlacePodiumId=new ArrayList<>();
     protected ArrayList<String> secondPlacePodiumId= new ArrayList<>();

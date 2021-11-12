@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +19,7 @@ public class Game {
     protected Double track;
     protected String   actualState;
     protected ArrayList<Lane> lanes = new ArrayList<>();
+    protected LocalDateTime dateTime = LocalDateTime.now();
 
 
     public Game() {

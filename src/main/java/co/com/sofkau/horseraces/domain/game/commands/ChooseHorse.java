@@ -1,13 +1,12 @@
 package co.com.sofkau.horseraces.domain.game.commands;
 
-import co.com.sofka.domain.generic.Command;
 import lombok.Getter;
 
 import java.util.Objects;
 
 
 @Getter
-public class ChooseHorse extends Command {
+public class ChooseHorse {
     private final String horseId;
     private final String playerId;
 

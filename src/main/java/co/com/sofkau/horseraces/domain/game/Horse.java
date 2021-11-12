@@ -12,12 +12,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @Document("horse")
-public class Horse {
+public class Horse{
     @Id
     protected String horseId;
     protected String name;
+    protected String horseMod;
 
-    public Horse(String name) {
+    public Horse(String name, String horseMod) {
         this.name = name;
+        this.horseMod = horseMod;
     }
 }

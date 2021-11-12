@@ -2,13 +2,12 @@ package co.com.sofkau.horseraces.domain.game.commands;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class CreateHorse{
-    private final String horseId;
-    private final String name;
-    private final String horseMod;
-
-
+public class ChangePlayerName {
+    private String playerId;
+    private String name;
 }
