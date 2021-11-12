@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-const HomePage = ({children}) => (
+import { connect } from 'react-redux'
+import { postGame } from '../actions/gameActions'
+const HomePage = ({ dispatch, loading, redirect, numberplayer,tracklength,idgame}) => {
+    console.log(idgame)
+    return(
     <section className="contentHome">
         <h1>Bienvenido a la carrera de caballos</h1>
         
@@ -30,5 +33,12 @@ const HomePage = ({children}) => (
         </div>
     
     </section>
-)
-export default HomePage
+    )
+    }
+const mapStateToProps = state => ({
+    loading: state.game.loading,
+    redirect: state.game.redirect,
+    hasErrors: state.game.hasErrors,
+    idgame:state.game.idgame
+})
+export default connect(mapStateToProps)(HomePage);

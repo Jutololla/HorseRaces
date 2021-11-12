@@ -16,6 +16,10 @@ import Footer from "./components/Footer"
 import Header from './components/Header'
 import StartPage from './pages/StartPage'
 import PodioPage from './pages/PodioPage'
+import ListPlayerPage from './pages/ListPlayerPage'
+import WelcomePage from './pages/WelcomePage'
+import SettingsGamePage from './pages/SettingsGamePage'
+import CreatePlayersPage from './pages/CreatePlayersPage.'
 
 const App = ({ dispatch }) => {
   return(
@@ -24,16 +28,18 @@ const App = ({ dispatch }) => {
     <Router>
     
     <Switch>
-      <Route exact path="/" component={() => {
+      <Route exact path="/home" component={() => {
                 return <HomePage></HomePage>
               }} />
-      <Route exact path="/crearjugadores" component={CrearJugadoresPage} />
-      <Route exact path="/configurarjuego" component={ConfigurarJuegoPage} />
+      <Route exact path="/crearjugadores" component={CreatePlayersPage} />
+      <Route exact path="/configurarjuego" component={SettingsGamePage} />
       <Route exact path="/iniciarjuego" component={StartGamePage} />
       <Route exact path="/mejoresjugadores" component={bestPlayerPage} />
       <Route exact path="/start" component={StartPage} />
       <Route exact path="/podio" component={PodioPage} />
-      <Redirect to="/"/>
+      <Route exact path="/listarjugadores" component={ListPlayerPage} />
+      <Route exact path="/" component={WelcomePage} />
+      <Redirect to="/home"/>
     </Switch>
 
     </Router>

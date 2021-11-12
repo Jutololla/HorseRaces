@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from "react";
 import { connect } from 'react-redux'
-import { fetchPlayers } from '../actions/gameActions'
+import { fetchHorses, postPlayer ,fetchPlayers} from "../actions/gameActions";
+import { PlayerGame } from "../components/Player";
+const ListPlayersPage = ({ dispatch, loading,hasErrors, redirect,players}) => {
 
-//import { fetchQuestions } from '../actions/questionActions'
-import { Player } from '../components/Player'
-
-const BestPlayerPage = ({ dispatch, loading, hasErrors,players}) => {
     useEffect(() => {
         dispatch(fetchPlayers())
     }, [dispatch])
@@ -16,13 +14,13 @@ const BestPlayerPage = ({ dispatch, loading, hasErrors,players}) => {
 
         //return questions.map(question => <Question key={question.id} question={question} excerpt />)
         console.log(players)
-        return players.map(player => <Player player={player}/>)
+        return players.map(player => <PlayerGame player={player}/>)
 
     }
-
-    return (
+    const [namePlayer, setNamePlayer] = useState('');
+    return(
         <section>
-            <h1>Lista de mejores jugadores</h1>
+            <h1>Crear jugadores</h1>
             <table className="table table-striped">
             <thead>
                 <tr>
@@ -32,20 +30,21 @@ const BestPlayerPage = ({ dispatch, loading, hasErrors,players}) => {
                 <th scope="col">Delete Player</th>
                 </tr>
             </thead>
-    <tbody>
-    {renderPlayers()}
-    </tbody>
-    </table>
-            
+            <tbody>
+                {renderPlayers()}
+            </tbody>
+            </table>
         </section>
-    )
+
+    );
+    
 }
 
 const mapStateToProps = state => ({
     loading: state.game.loading,
+    redirect: state.game.redirect,
     hasErrors: state.game.hasErrors,
-    players: state.game.players,
-
+    players:state.game.players
 })
 
-export default connect(mapStateToProps)(BestPlayerPage)
+export default connect(mapStateToProps)(ListPlayersPage);

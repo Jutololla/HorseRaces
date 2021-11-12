@@ -32,4 +32,14 @@ export const PlayerGame = ({ player, excerpt, onDelete }) => (
         <td><button type="button" className="btn btn-danger" onClick={PlayerDelete} >Delete</button></td>
         
     </tr>
+
 )
+
+export const PlayerSelecionado = ({ player, excerpt, onDelete}) => (
+    <tr>
+        
+        <td>{player.playerId}</td>
+        <td>{player.name}</td>
+        
+        
+    </tr>)

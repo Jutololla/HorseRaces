@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 //import { fetchQuestions } from '../actions/questionActions'
 import { Player ,PlayerGame } from '../components/Player'
 
-const StartGamePage = ({ dispatch, loading, hasErrors }) => {
+const StartGamePage = ({ dispatch, loading, hasErrors ,players}) => {
     useEffect(() => {
         //dispatch(fetchQuestions())
     }, [dispatch])
