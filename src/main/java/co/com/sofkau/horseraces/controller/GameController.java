@@ -12,6 +12,7 @@ import co.com.sofkau.horseraces.usecases.game.commands.*;
 import co.com.sofkau.horseraces.usecases.game.queries.GetAllHorsesUseCase;
 import co.com.sofkau.horseraces.usecases.game.queries.GetAllPlayersUseCase;
 import co.com.sofkau.horseraces.usecases.game.queries.GetAllPodiumsUseCase;
+import co.com.sofkau.horseraces.usecases.game.queries.GetLastGameUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -111,6 +112,12 @@ public class GameController {
         return new ResponseEntity(useCase.apply(podiumRepository), HttpStatus.OK);
     }
 
+    @GetMapping(value = "getlastgame")
+    public ResponseEntity<String> getLastGame() {
+        var useCase = new GetLastGameUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository), HttpStatus.OK);
+    }
+
     @PostMapping(value = "changeplayername")
     public ResponseEntity<Player> changeplayername(@RequestBody ChangePlayerName command) {
         var useCase = new ChangePlayerNameUseCase();
@@ -123,5 +130,7 @@ public class GameController {
         useCase.apply(playerRepository, command);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
 
 }
