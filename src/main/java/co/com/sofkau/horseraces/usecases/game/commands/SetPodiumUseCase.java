@@ -1,19 +1,12 @@
 package co.com.sofkau.horseraces.usecases.game.commands;
 
-import co.com.sofka.business.generic.BusinessException;
-import co.com.sofka.business.generic.UseCase;
-import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
 import co.com.sofkau.horseraces.domain.game.Podium;
-import co.com.sofkau.horseraces.domain.game.commands.AddTrack;
-import co.com.sofkau.horseraces.domain.game.commands.SetPodium;
 import co.com.sofkau.horseraces.domain.game.utils.LaneComparator;
 import co.com.sofkau.horseraces.repositories.GameRepository;
 import co.com.sofkau.horseraces.repositories.PlayerRepository;
 import co.com.sofkau.horseraces.repositories.PodiumRepository;
 
-import java.util.Collections;
 import java.util.Optional;
 
 public class SetPodiumUseCase{

@@ -1,16 +1,11 @@
 package co.com.sofkau.horseraces.usecases;
 
 import co.com.sofka.business.repository.DomainEventRepository;
-import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.values.DateTime;
-import co.com.sofkau.horseraces.domain.game.values.GameId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class AddTrackUseCaseTest {
