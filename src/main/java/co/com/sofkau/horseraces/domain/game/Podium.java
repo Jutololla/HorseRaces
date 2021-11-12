@@ -1,60 +1,34 @@
 package co.com.sofkau.horseraces.domain.game;
 
 import co.com.sofka.domain.generic.Entity;
+import co.com.sofkau.horseraces.domain.game.values.DateTime;
 import co.com.sofkau.horseraces.domain.game.values.PlayerId;
 import co.com.sofkau.horseraces.domain.game.values.PodiumId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Podium extends Entity<PodiumId> {
-    protected PlayerId firstPlace;
-    protected PlayerId secondPlace;
-    protected PlayerId thirdPlace;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Objects;
+@AllArgsConstructor
+@Getter
+@Setter
+@Document
+public class Podium{
+    @Id
+    protected String podiumId;
+    protected String firstPlacePlayerId;
+    protected String secondPlacePlayerId;
+    protected String thirdPlacePlayerId;
+    protected Double track;
+    protected LocalDateTime dateTime;
+    protected ArrayList<Lane> lanes = new ArrayList<>();
 
-    private Podium(PodiumId entityId) {
-        super(entityId);
+    public Podium() {
+        this.dateTime = LocalDateTime.now();
     }
-
-    protected Podium(PodiumId entityId, PlayerId firstPlace, PlayerId secondPlace, PlayerId thirdPlace) {
-        super(entityId);
-        this.firstPlace = firstPlace;
-        this.secondPlace = secondPlace;
-        this.thirdPlace = thirdPlace;
-    }
-
-    public static Podium from(PodiumId entityId, PlayerId firstPlace, PlayerId secondPlace, PlayerId thirdPlace) {
-        var podium = new Podium(entityId);
-        podium.firstPlace = firstPlace;
-        podium.secondPlace = secondPlace;
-        podium.thirdPlace = thirdPlace;
-        return podium;
-    }
-
-    public static Podium from() {
-        return new Podium(new PodiumId());
-    }
-
-    public PlayerId getFirstPlace() {
-        return firstPlace;
-    }
-
-    public void setFirstPlace(PlayerId firstPlace) {
-        this.firstPlace = firstPlace;
-    }
-
-    public PlayerId getSecondPlace() {
-        return secondPlace;
-    }
-
-    public void setSecondPlace(PlayerId secondPlace) {
-        this.secondPlace = secondPlace;
-    }
-
-    public PlayerId getThirdPlace() {
-        return thirdPlace;
-    }
-
-    public void setThirdPlace(PlayerId thirdPlace) {
-        this.thirdPlace = thirdPlace;
-    }
-
-
 }

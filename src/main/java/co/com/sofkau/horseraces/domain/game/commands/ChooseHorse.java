@@ -4,27 +4,20 @@ import co.com.sofka.domain.generic.Command;
 import co.com.sofkau.horseraces.domain.game.values.GameId;
 import co.com.sofkau.horseraces.domain.game.values.HorseId;
 import co.com.sofkau.horseraces.domain.game.values.PlayerId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+import java.util.Objects;
+
+
+@Getter
 public class ChooseHorse extends Command {
-    private final GameId gameId;
-    private final HorseId horseId;
-    private final PlayerId playerId;
+    private final String horseId;
+    private final String playerId;
 
-    public ChooseHorse(GameId gameId, HorseId horseId, PlayerId playerId) {
-        this.gameId = gameId;
-        this.horseId = horseId;
-        this.playerId = playerId;
+    public ChooseHorse(String horseId, String playerId) {
+        this.horseId = Objects.requireNonNull(horseId);
+        this.playerId = Objects.requireNonNull(playerId);
     }
 
-    public GameId getGameId() {
-        return gameId;
-    }
-
-    public HorseId getHorseId() {
-        return horseId;
-    }
-
-    public PlayerId getPlayerId() {
-        return playerId;
-    }
 }

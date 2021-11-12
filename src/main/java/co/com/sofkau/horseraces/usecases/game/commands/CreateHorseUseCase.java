@@ -5,23 +5,26 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
+import co.com.sofkau.horseraces.domain.game.Horse;
+import co.com.sofkau.horseraces.domain.game.commands.CreateGame;
 import co.com.sofkau.horseraces.domain.game.commands.CreateHorse;
+import co.com.sofkau.horseraces.repositories.GameRepository;
+import co.com.sofkau.horseraces.repositories.HorseRepository;
 
-public class CreateHorseUseCase extends UseCase<RequestCommand<CreateHorse>, ResponseEvents> {
+import java.util.Objects;
+import java.util.Optional;
 
+public class CreateHorseUseCase{
 
-    @Override
-    public void executeUseCase(RequestCommand<CreateHorse> createHorseRequestCommand) {
-        var command = createHorseRequestCommand.getCommand();
-        var game = Game.from(command.getGameId(), retrieveEvents(command.getHorseId().value()));
-
-        if (game.getActualState().value().equals("IDLE")) {
-            game.createHorse(command.getHorseId(), command.getName());
-            emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
-        } else {
-            emit().onError(new BusinessException(game.identity().value(),
-                    "The game has not finished"));
+    public Object apply(HorseRepository repository, CreateHorse command) {
+        Horse horse;
+        if(Objects.isNull(command.getHorseId())||command.getHorseId().isEmpty()) {
+            horse = repository.save(new Horse(command.getName()));
         }
+        else{
+            horse = repository.save(new Horse(command.getHorseId(),command.getName()));
+        }
+        return Optional.of(horse.getHorseId());
     }
 }
 

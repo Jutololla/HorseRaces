@@ -5,21 +5,22 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofkau.horseraces.domain.game.Game;
+import co.com.sofkau.horseraces.domain.game.Player;
 import co.com.sofkau.horseraces.domain.game.commands.AddTrack;
+import co.com.sofkau.horseraces.repositories.GameRepository;
 
-public class AddTrackUseCase extends UseCase<RequestCommand<AddTrack>, ResponseEvents> {
+import java.util.Optional;
 
-    @Override
-    public void executeUseCase(RequestCommand<AddTrack> addTrackRequestCommand) {
-        var command = addTrackRequestCommand.getCommand();
-        var game = Game.from(command.getGameId(), retrieveEvents(command.getGameId().value()));
+public class AddTrackUseCase{
+    public Object apply(GameRepository gameRepository, AddTrack command) {
+        Optional<Game> optionalEntity = gameRepository.findById(command.getGameId());
 
-        if (game.getActualState().value().equals("IDLE")) {
-            game.addTrack(command.getTrackId(), command.getLength());
-            emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
+        if (optionalEntity.isPresent()&&optionalEntity.get().getActualState().equals("IDLE")) {
+            var entity = optionalEntity.get();
+            entity.setTrack(command.getLength());
+            return Optional.of(entity);
         } else {
-            emit().onError(new BusinessException(game.identity().value(),
-                    "The game has not finished"));
+            throw new NullPointerException("The referenced game and/or horse doesn't exist");
         }
     }
 }

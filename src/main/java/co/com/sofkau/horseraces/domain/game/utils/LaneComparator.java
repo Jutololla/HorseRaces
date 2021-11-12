@@ -8,9 +8,9 @@ public class LaneComparator implements Comparator<Lane> {
 
     @Override
     public int compare(Lane e1, Lane e2) {
-        if(e1.getSpeed().value()<e2.getSpeed().value()){
+        if(e1.getSpeed()<e2.getSpeed()){
             return 1;
-        }else if(e1.getSpeed().value()>e2.getSpeed().value()){
+        }else if(e1.getSpeed()>e2.getSpeed()){
             return -1;
         }else{
             return 0;
