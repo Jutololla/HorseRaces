@@ -1,7 +1,6 @@
 package co.com.sofkau.horseraces.domain.game;
 
-import co.com.sofka.domain.generic.Entity;
-import co.com.sofkau.horseraces.domain.game.values.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
