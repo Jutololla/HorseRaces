@@ -24,19 +24,9 @@ public class ChooseHorseUseCase {
         if (optionalEntity.isPresent()&&optionalHorse.isPresent()) {
             var entity = optionalEntity.get();
             entity.setHorseId(command.getHorseId());
-            return Optional.of(entity);
+            return Optional.of(playerRepository.save(entity));
         } else {
             throw new NullPointerException("The referenced player and/or horse doesn't exist");
         }
     }
 }
-
-//    apply((HorseChosen event) -> {
-//            if (game.players.containsKey(event.getPlayerId().value())) {
-//                game.players.get(event.getPlayerId().value())
-//                        .setHorseId(event.getHorseId());
-//            } else {
-//                throw new NullPointerException("The referenced player doesn't exist");
-//            }
-//            //<IDLE,IDLE>
-//        });

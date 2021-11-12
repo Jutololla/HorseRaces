@@ -12,13 +12,13 @@ import co.com.sofkau.horseraces.repositories.GameRepository;
 import java.util.Optional;
 
 public class AddTrackUseCase{
-    public Object apply(GameRepository gameRepository, AddTrack command) {
+    public Object apply(GameRepository gameRepository, AddTrack command) throws Exception {
         Optional<Game> optionalEntity = gameRepository.findById(command.getGameId());
 
         if (optionalEntity.isPresent()&&optionalEntity.get().getActualState().equals("IDLE")) {
             var entity = optionalEntity.get();
             entity.setTrack(command.getLength());
-            return Optional.of(entity);
+            return Optional.of(gameRepository.save(entity));
         } else {
             throw new NullPointerException("The referenced game and/or horse doesn't exist");
         }

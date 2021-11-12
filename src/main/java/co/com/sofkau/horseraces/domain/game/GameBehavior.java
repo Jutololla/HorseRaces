@@ -1,11 +1,25 @@
 package co.com.sofkau.horseraces.domain.game;
 
+import co.com.sofkau.horseraces.domain.game.commands.PrepareGame;
+import co.com.sofkau.horseraces.repositories.HorseRepository;
+
 public class GameBehavior {
 
     public static Game apply(Game game) {
         //espacio para colocar comportamiento
         return game;
     }
+
+//    public static Game apply(Game game, PrepareGame command, Iterable<Player> players){
+//            int counter = 1;
+//            for (Player iterable:players) {
+//                game.lanes.add(new Lane(iterable.getPlayerId(),iterable.horseId,
+//                        game.getTrack(),String.valueOf(counter)));
+//                counter+=1;
+//            }
+//            game.setActualState("PREPARED");
+//
+//        };
 
 
 //        apply((TrackAdded event) -> {
@@ -35,14 +49,6 @@ public class GameBehavior {
 //
 //
 //
-//        apply((GamePrepared event)->{
-//            int counter = 1;
-//            for (PlayerId iterable:event.getPlayerIds()) {
-//                game.lanes.add(Lane.from(new LaneId(),iterable,game.track.length,new LaneNumber(String.valueOf(counter))));
-//                counter+=1;
-//            }
-//            game.actualState= new ActualState("PREPARED");
-//        });
 //
 //        apply((RaceRun event)->{
 //            game.actualState= new ActualState("RUNNING");

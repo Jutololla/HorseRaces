@@ -1,7 +1,5 @@
 package co.com.sofkau.horseraces.controller;
 
-import co.com.sofka.business.generic.UseCaseHandler;
-import co.com.sofka.business.support.RequestCommand;
 import co.com.sofkau.horseraces.domain.game.Game;
 import co.com.sofkau.horseraces.domain.game.Player;
 import co.com.sofkau.horseraces.domain.game.commands.*;
@@ -55,8 +53,14 @@ public class GameController {
     }
 
     @PostMapping(value = "addtrack")
-    public ResponseEntity<Game> addTrack(@RequestBody AddTrack command) {
+    public ResponseEntity<Game> addTrack(@RequestBody AddTrack command) throws Exception {
         var useCase = new AddTrackUseCase();
         return new ResponseEntity(useCase.apply(gameRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "preparegame")
+    public ResponseEntity<Game> prepareGame(@RequestBody PrepareGame command) {
+        var useCase = new PrepareGameUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository, command), HttpStatus.OK);
     }
 }

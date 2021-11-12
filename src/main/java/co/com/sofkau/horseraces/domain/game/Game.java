@@ -1,5 +1,6 @@
 package co.com.sofkau.horseraces.domain.game;
 
+import co.com.sofka.business.generic.BusinessException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -29,6 +30,15 @@ public class Game {
     public Game(String gameId) {
         this.gameId = gameId;
         this.actualState = "IDLE";
+    }
+
+    public void setTrack(Double track) throws Exception {
+        if(!(track.isInfinite()|| track.isNaN()||track<2000)) {
+            this.track = track;
+        }
+        else{
+            throw new Exception("the track length must be a valid value greater than 2000");
+        }
     }
 
     //    public void addTrack(TrackId trackId, Length length)    {
