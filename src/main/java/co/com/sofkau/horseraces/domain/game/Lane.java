@@ -50,6 +50,10 @@ public class Lane {
             }
             case ("1&6_BONUS"):
                 return (value==100||value==600)?value+200:value;
+            case ("4_JUMP"):
+                return (value==400)?value*2:value;
+            case("LUCKY_ODD"):
+                return (value%2==0)?value*1.3:value*0.7;
             default:
                 return value;
 
