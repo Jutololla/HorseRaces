@@ -24,6 +24,7 @@ public class ChooseHorseUseCase {
         if (optionalEntity.isPresent()&&optionalHorse.isPresent()) {
             var entity = optionalEntity.get();
             entity.setHorseId(command.getHorseId());
+            entity.setHorseMod(optionalHorse.get().getHorseMod());
             return Optional.of(playerRepository.save(entity));
         } else {
             throw new NullPointerException("The referenced player and/or horse doesn't exist");

@@ -31,7 +31,7 @@ public class PrepareGameUseCase {
             int counter = 1;
             for (Player iterable:players) {
                 game.getLanes().add(new Lane(iterable.getPlayerId(),iterable.getHorseId(),
-                        game.getTrack(),String.valueOf(counter)));
+                        iterable.getHorseMod(),game.getTrack(),String.valueOf(counter)));
                 counter+=1;
             }
             game.setActualState("PREPARED");

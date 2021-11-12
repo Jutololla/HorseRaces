@@ -110,4 +110,18 @@ public class GameController {
         var useCase = new GetAllPodiumsUseCase();
         return new ResponseEntity(useCase.apply(podiumRepository), HttpStatus.OK);
     }
+
+    @PostMapping(value = "changeplayername")
+    public ResponseEntity<Player> changeplayername(@RequestBody ChangePlayerName command) {
+        var useCase = new ChangePlayerNameUseCase();
+        return new ResponseEntity(useCase.apply(playerRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "deleteplayer")
+    public ResponseEntity<Void> deletePlayer(@RequestBody DeletePlayer command) {
+        var useCase = new DeletePlayerUseCase();
+        useCase.apply(playerRepository, command);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
