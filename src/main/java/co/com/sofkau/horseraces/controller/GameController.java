@@ -1,6 +1,7 @@
 package co.com.sofkau.horseraces.controller;
 
 import co.com.sofkau.horseraces.domain.game.Game;
+import co.com.sofkau.horseraces.domain.game.Horse;
 import co.com.sofkau.horseraces.domain.game.Player;
 import co.com.sofkau.horseraces.domain.game.commands.*;
 import co.com.sofkau.horseraces.repositories.GameRepository;
@@ -8,13 +9,13 @@ import co.com.sofkau.horseraces.repositories.HorseRepository;
 import co.com.sofkau.horseraces.repositories.PlayerRepository;
 import co.com.sofkau.horseraces.repositories.PodiumRepository;
 import co.com.sofkau.horseraces.usecases.game.commands.*;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllHorsesUseCase;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllPlayersUseCase;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllPodiumsUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/")
@@ -82,5 +83,30 @@ public class GameController {
         var useCase = new DoRematchUseCase();
         return new ResponseEntity(useCase.apply(gameRepository, playerRepository
                 , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "cleanlanes")
+    public ResponseEntity<Game> cleanLanes(@RequestBody CleanLanes command) {
+        var useCase = new CleanLanesUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "gethorses")
+    public ResponseEntity<Horse> getHorses() {
+        var useCase = new GetAllHorsesUseCase();
+        return new ResponseEntity(useCase.apply(horseRepository), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getplayers")
+    public ResponseEntity<Horse> getPlayers() {
+        var useCase = new GetAllPlayersUseCase();
+        return new ResponseEntity(useCase.apply(playerRepository), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getpodiums")
+    public ResponseEntity<Horse> getPodiums() {
+        var useCase = new GetAllPodiumsUseCase();
+        return new ResponseEntity(useCase.apply(podiumRepository), HttpStatus.OK);
     }
 }

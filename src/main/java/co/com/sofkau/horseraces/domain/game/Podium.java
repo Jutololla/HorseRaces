@@ -26,9 +26,11 @@ public class Podium{
     protected String thirdPlacePlayerId;
     protected Double track;
     protected LocalDateTime dateTime;
+    protected String gameId;
     protected ArrayList<Lane> lanes = new ArrayList<>();
 
     public Podium() {
         this.dateTime = LocalDateTime.now();
     }
+
 }

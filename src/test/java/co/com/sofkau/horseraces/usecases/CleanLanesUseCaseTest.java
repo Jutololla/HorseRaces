@@ -1,25 +1,14 @@
 package co.com.sofkau.horseraces.usecases;
 
-import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
-import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.horseraces.domain.game.commands.CleanLanesAndPodium;
-import co.com.sofkau.horseraces.domain.game.events.*;
-import co.com.sofkau.horseraces.domain.game.values.*;
-import co.com.sofkau.horseraces.usecases.game.commands.CleanLanesAndPodiumUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @ExtendWith(MockitoExtension.class)
-class CleanLanesAndPodiumUseCaseTest {
+class CleanLanesUseCaseTest {
     @Mock
     private DomainEventRepository repository;
 
@@ -27,10 +16,10 @@ class CleanLanesAndPodiumUseCaseTest {
     @DisplayName("Test rematch with valid arguments")
     void validArguments_clean() {
         //arrange
-//        var command = new CleanLanesAndPodium(
+//        var command = new CleanLanes(
 //                new GameId("Game001"));
 //
-//        var useCase = new CleanLanesAndPodiumUseCase();
+//        var useCase = new CleanLanesUseCase();
 //        Mockito.when(repository.getEventsBy(command.getGameId().value())).thenReturn(EventRestore());
 //        useCase.addRepository(repository);
 //

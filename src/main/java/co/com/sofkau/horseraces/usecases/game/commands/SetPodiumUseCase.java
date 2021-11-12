@@ -33,6 +33,7 @@ public class SetPodiumUseCase{
             podium.setThirdPlacePlayerId(game.getLanes().get(2).getPlayerId());
             podium.setTrack(game.getTrack());
             podium.setLanes(game.getLanes());
+            podium.setGameId(game.getGameId());
             podiumRepository.save(podium);
 
             playerRepository.findById(podium.getFirstPlacePlayerId())

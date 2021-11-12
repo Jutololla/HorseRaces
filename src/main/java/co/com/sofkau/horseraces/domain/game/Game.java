@@ -17,10 +17,7 @@ public class Game {
     protected String gameId;
     protected Double track;
     protected String   actualState;
-    protected HashMap<String,Player> players = new HashMap<>();
-    protected ArrayList<Podium> podium = new ArrayList<>();
     protected ArrayList<Lane> lanes = new ArrayList<>();
-    protected HashMap<String,Horse> horses = new HashMap<>();
 
 
     public Game() {
