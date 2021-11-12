@@ -18,7 +18,7 @@ public class ChangePlayerNameUseCase {
             entity.setName(command.getName());
             return Optional.of(playerRepository.save(entity));
         } else {
-            throw new NullPointerException("The referenced player and/or horse doesn't exist");
+            throw new NullPointerException("The referenced player doesn't exist");
         }
     }
 }

@@ -30,7 +30,7 @@ public class DoRematchUseCase {
             gameRepository.save(game);
             return runRaceUseCase.apply(gameRepository,playerRepository,podiumRepository,new RunRace(game.getGameId()));
         } else {
-            throw new NullPointerException("The referenced game doesn't exist or the game is not PREPARED");
+            throw new NullPointerException("The referenced game doesn't exist or the game is not FINISHED");
         }
 
 

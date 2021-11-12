@@ -20,7 +20,7 @@ public class AddTrackUseCase{
             entity.setTrack(command.getLength());
             return Optional.of(gameRepository.save(entity));
         } else {
-            throw new NullPointerException("The referenced game and/or horse doesn't exist");
+            throw new NullPointerException("The referenced game doesn't exist or is not in IDLE state");
         }
     }
 }
