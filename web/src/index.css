@@ -140,3 +140,8 @@ img{
 canvas {
   border: 1px solid black;
 }
+
+.imageninicio{
+  display:block;
+  margin:auto;
+}

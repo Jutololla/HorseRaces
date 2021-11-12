@@ -20,12 +20,14 @@ const WelcomePage=({ dispatch, loading, redirect, idgame})=>{
     return(
         <section>
             <form onSubmit={onSubmit}>
-            <img src={gif} alt="gif" />
-            <div>
+            <img src={gif} alt="gif" className="imageninicio"/>
+            <div >
+            <center>
             <button type="submit" className="btn btn-success">
                     Continuar
-                </button>
-                </div>
+            </button>
+            </center>
+            </div>
             </form>
         </section>
     )

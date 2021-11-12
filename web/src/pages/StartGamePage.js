@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from "react";
+
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchHorses, fetchPlayers } from '../actions/gameActions'
 
 //import { fetchQuestions } from '../actions/questionActions'
-import { Player ,PlayerGame } from '../components/Player'
+import { PlayerSelecionado ,PlayerGame } from '../components/Player'
 
-const StartGamePage = ({ dispatch, loading, hasErrors ,players}) => {
-    useEffect(() => {
-        //dispatch(fetchQuestions())
-    }, [dispatch])
+const StartGamePage = ({ dispatch, loading, hasErrors ,players,horses}) => {
     
-    let player=[
-        {
-            id:1,
-            nombre:"yhomi"
-        },
-        {
-            id:2,
-            nombre:"alexandra"
-        },
-        {
-            id:51,
-            nombre:"alexandra"
-        }
-    ]
-    const renderQuestions = () => {
+    const [formState, setformState] = useState({
+        horse:'',
+        namePlayer:''
+    })
+
+    useEffect(() => {
+        dispatch(fetchPlayers())
+        dispatch(fetchHorses())
+    }, [dispatch])
+    const handleInputChange = ({target}) => {
+        console.log(target);
+        setformState({...formState,
+            [target.name]:target.value
+            
+        });
+    }
+    
+    const renderPlayers = () => {
         if (loading) return <p>Loading player...</p>
         if (hasErrors) return <p>Unable to display player.</p>
 
         //return questions.map(question => <Question key={question.id} question={question} excerpt />)
-        return player.map(player => <PlayerGame player={player} />)
+        return players.map(player => <PlayerSelecionado player={player} renderHorses={renderHorses} handleInputChange={handleInputChange}/>)
+    }
+    const renderHorses = () => {
+        if (loading) return <p>Loading horse...</p>
+        if (hasErrors) return <p>Unable to display horses.</p>
+
+        //return questions.map(question => <Question key={question.id} question={question} excerpt />)
+        console.log(horses)
+        return horses.map(horse => <option value={horse.name}>{horse.name}</option>)
+
     }
 
     return (
@@ -40,12 +51,13 @@ const StartGamePage = ({ dispatch, loading, hasErrors ,players}) => {
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Update Name</th>
-                <th scope="col">Delete Player</th>
+                <th scope="col">Escoge tu caballo</th>
+                <th scope="col">Escoge tu participante</th>
+                
                 </tr>
             </thead>
             <tbody>
-            {renderQuestions()}
+            {renderPlayers()}
             </tbody>
             </table>
 
@@ -66,9 +78,11 @@ const StartGamePage = ({ dispatch, loading, hasErrors ,players}) => {
 }
 
 const mapStateToProps = state => ({
-    loading: state.question.loading,
-    questions: state.question.questions,
-    hasErrors: state.question.hasErrors,
+    loading: state.game.loading,
+    questions: state.game.questions,
+    hasErrors: state.game.hasErrors,
+    players:state.game.players,
+    horses:state.game.horses
 })
 
-export default StartGamePage
+export default connect(mapStateToProps)(StartGamePage)

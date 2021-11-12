@@ -35,11 +35,19 @@ export const PlayerGame = ({ player, excerpt, onDelete }) => (
 
 )
 
-export const PlayerSelecionado = ({ player, excerpt, onDelete}) => (
+export const PlayerSelecionado = ({ player, excerpt, onDelete,handleInputChange,renderHorses}) => (
     <tr>
         
         <td>{player.playerId}</td>
         <td>{player.name}</td>
+        <td><select name="horse" onChange={handleInputChange} id="horse" className="form-select">
+                    <option selected>Selecciona tu caballo</option>
+                        {renderHorses()}
+                    </select>
+        </td>
+        <td>
+        <input type="checkbox" />
+        </td>
         
         
     </tr>)

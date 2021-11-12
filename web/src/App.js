@@ -41,8 +41,9 @@ const App = ({ dispatch }) => {
       <Route exact path="/" component={WelcomePage} />
       <Redirect to="/home"/>
     </Switch>
-
+    
     </Router>
+    <footer></footer>
 
     
 
