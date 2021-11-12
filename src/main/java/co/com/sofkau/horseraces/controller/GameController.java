@@ -1,26 +1,112 @@
 package co.com.sofkau.horseraces.controller;
 
-import co.com.sofkau.horseraces.domain.game.commands.CreateGame;
-import co.com.sofkau.horseraces.domain.game.commands.CreateHorse;
-import co.com.sofkau.horseraces.services.EventService;
+import co.com.sofkau.horseraces.domain.game.Game;
+import co.com.sofkau.horseraces.domain.game.Horse;
+import co.com.sofkau.horseraces.domain.game.Player;
+import co.com.sofkau.horseraces.domain.game.commands.*;
+import co.com.sofkau.horseraces.repositories.GameRepository;
+import co.com.sofkau.horseraces.repositories.HorseRepository;
+import co.com.sofkau.horseraces.repositories.PlayerRepository;
+import co.com.sofkau.horseraces.repositories.PodiumRepository;
+import co.com.sofkau.horseraces.usecases.game.commands.*;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllHorsesUseCase;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllPlayersUseCase;
+import co.com.sofkau.horseraces.usecases.game.queries.GetAllPodiumsUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/")
 public class GameController {
 
     @Autowired
-    private EventService eventService;
+    private GameRepository gameRepository;
 
-    @PostMapping(value = "api/creategame")
-    public void createGame(@RequestBody CreateGame createGame) {
-        eventService.createGame(createGame);
+    @Autowired
+    private HorseRepository horseRepository;
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
+    private PodiumRepository podiumRepository;
+
+    @PostMapping(value = "creategame")
+    public ResponseEntity<String> createGame(@RequestBody CreateGame command) {
+        var useCase = new CreateGameUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, command), HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "api/createhorse")
-    public void createHorse(@RequestBody CreateHorse createHorse) {
-        eventService.createHorse(createHorse);
+    @PostMapping(value = "createhorse")
+    public ResponseEntity<String> createHorse(@RequestBody CreateHorse command) {
+        var useCase = new CreateHorseUseCase();
+        return new ResponseEntity(useCase.apply(horseRepository, command), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "createplayer")
+    public ResponseEntity<String> createPlayer(@RequestBody CreatePlayer command) {
+        var useCase = new CreatePlayerUseCase();
+        return new ResponseEntity(useCase.apply(playerRepository, command), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "choosehorse")
+    public ResponseEntity<Player> chooseHorse(@RequestBody ChooseHorse command) {
+        var useCase = new ChooseHorseUseCase();
+        return new ResponseEntity(useCase.apply(playerRepository, horseRepository, command)
+                , HttpStatus.OK);
+    }
+
+    @PostMapping(value = "addtrack")
+    public ResponseEntity<Game> addTrack(@RequestBody AddTrack command) throws Exception {
+        var useCase = new AddTrackUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "preparegame")
+    public ResponseEntity<Game> prepareGame(@RequestBody PrepareGame command) {
+        var useCase = new PrepareGameUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository, command)
+                , HttpStatus.OK);
+    }
+
+    @PostMapping(value = "runrace")
+    public ResponseEntity<Game> runRace(@RequestBody RunRace command) {
+        var useCase = new RunRaceUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "dorematch")
+    public ResponseEntity<Game> doRematch(@RequestBody DoRematch command) {
+        var useCase = new DoRematchUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "cleanlanes")
+    public ResponseEntity<Game> cleanLanes(@RequestBody CleanLanes command) {
+        var useCase = new CleanLanesUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "gethorses")
+    public ResponseEntity<Horse> getHorses() {
+        var useCase = new GetAllHorsesUseCase();
+        return new ResponseEntity(useCase.apply(horseRepository), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getplayers")
+    public ResponseEntity<Horse> getPlayers() {
+        var useCase = new GetAllPlayersUseCase();
+        return new ResponseEntity(useCase.apply(playerRepository), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getpodiums")
+    public ResponseEntity<Horse> getPodiums() {
+        var useCase = new GetAllPodiumsUseCase();
+        return new ResponseEntity(useCase.apply(podiumRepository), HttpStatus.OK);
     }
 }

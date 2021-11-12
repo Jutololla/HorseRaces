@@ -8,19 +8,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class SetPodiumUseCaseTest {
-
+class CleanLanesUseCaseTest {
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    @DisplayName("Test setting podium with valid arguments")
-    void validArguments_setPodium() {
+    @DisplayName("Test rematch with valid arguments")
+    void validArguments_clean() {
         //arrange
-//        var command = new SetPodium(
+//        var command = new CleanLanes(
 //                new GameId("Game001"));
 //
-//        var useCase = new SetPodiumUseCase();
+//        var useCase = new CleanLanesUseCase();
 //        Mockito.when(repository.getEventsBy(command.getGameId().value())).thenReturn(EventRestore());
 //        useCase.addRepository(repository);
 //
@@ -30,12 +29,12 @@ class SetPodiumUseCaseTest {
 //                .syncExecutor(useCase, new RequestCommand<>(command))
 //                .orElseThrow()
 //                .getDomainEvents();
-//        var event = (PodiumSet) events.get(0);
+//        var event = (LanesAndPodiumCleaned) events.get(0);
 //
 //        //Assert
-
-    }
-
+//
+//    }
+//
 //    private List<DomainEvent> EventRestore() {
 //        ArrayList<PlayerId> playersIds = new ArrayList<>();
 //        playersIds.add(PlayerId.of("Player1"));
@@ -56,7 +55,8 @@ class SetPodiumUseCaseTest {
 //                new HorseChosen(new HorseId("Horse1"), new PlayerId("Player3")),
 //                new HorseChosen(new HorseId("Horse2"), new PlayerId("Player4")),
 //                new GamePrepared(playersIds),
-//                new RaceRun());
-//    }
+//                new RaceRun(),
+//                new PodiumSet());
+    }
 
 }
