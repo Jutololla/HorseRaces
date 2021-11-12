@@ -2,15 +2,12 @@ package co.com.sofkau.horseraces.domain.game.commands;
 
 import co.com.sofka.domain.generic.Command;
 import co.com.sofkau.horseraces.domain.game.values.GameId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public class RunRace extends Command {
-    private final GameId gameId;
-
-    public RunRace(GameId gameId) {
-        this.gameId = gameId;
-    }
-
-    public GameId getGameId() {
-        return gameId;
-    }
+@AllArgsConstructor
+@Getter
+public class RunRace {
+    private final String gameId;
+    private final String test;
 }

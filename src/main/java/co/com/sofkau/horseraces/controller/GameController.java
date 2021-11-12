@@ -63,4 +63,10 @@ public class GameController {
         var useCase = new PrepareGameUseCase();
         return new ResponseEntity(useCase.apply(gameRepository, playerRepository, command), HttpStatus.OK);
     }
+
+    @PostMapping(value = "runrace")
+    public ResponseEntity<Game> runRace(@RequestBody RunRace command) {
+        var useCase = new RunRaceUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, command), HttpStatus.OK);
+    }
 }
