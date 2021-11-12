@@ -20,6 +20,7 @@ public class Player{
     protected String playerId;
     protected String name;
     protected String horseId;
+    protected String horseMod;
     protected Lane lane;
     protected ArrayList<String> firstPlacePodiumId=new ArrayList<>();
     protected ArrayList<String> secondPlacePodiumId= new ArrayList<>();

@@ -19,10 +19,10 @@ public class CreateHorseUseCase{
     public Object apply(HorseRepository repository, CreateHorse command) {
         Horse horse;
         if(Objects.isNull(command.getHorseId())||command.getHorseId().isEmpty()) {
-            horse = repository.save(new Horse(command.getName()));
+            horse = repository.save(new Horse(command.getName(),command.getHorseMod()));
         }
         else{
-            horse = repository.save(new Horse(command.getHorseId(),command.getName()));
+            horse = repository.save(new Horse(command.getHorseId(),command.getName(), command.getHorseMod()));
         }
         return Optional.of(horse.getHorseId());
     }
