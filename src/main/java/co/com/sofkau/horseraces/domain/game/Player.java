@@ -22,9 +22,9 @@ public class Player{
     protected String name;
     protected String horseId;
     protected Lane lane;
-    protected ArrayList<Podium> firstPlace=new ArrayList<>();
-    protected ArrayList<Podium> secondPlace= new ArrayList<>();
-    protected ArrayList<Podium> thirdPlace=new ArrayList<>();
+    protected ArrayList<String> firstPlacePodiumId=new ArrayList<>();
+    protected ArrayList<String> secondPlacePodiumId= new ArrayList<>();
+    protected ArrayList<String> thirdPlacePodiumId=new ArrayList<>();
 
     public Player(String playerId, String name) {
         this.playerId = playerId;

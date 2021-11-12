@@ -24,7 +24,7 @@ public class PrepareGameUseCase {
         var players=playerRepository.findAllById(command.getPlayerIds());
 
         if (optionalEntity.isPresent()&&optionalEntity.get().getActualState().equals("IDLE")
-        &&havePlayersAHorse(players)&&isTrackValid(optionalEntity.get())) {
+        &&havePlayersAHorse(players)&&isTrackValid(optionalEntity.get())&&command.getPlayerIds().size()>=3) {
 
             var game = optionalEntity.get();
 

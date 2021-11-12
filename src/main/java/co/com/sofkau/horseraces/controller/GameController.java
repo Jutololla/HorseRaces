@@ -6,6 +6,7 @@ import co.com.sofkau.horseraces.domain.game.commands.*;
 import co.com.sofkau.horseraces.repositories.GameRepository;
 import co.com.sofkau.horseraces.repositories.HorseRepository;
 import co.com.sofkau.horseraces.repositories.PlayerRepository;
+import co.com.sofkau.horseraces.repositories.PodiumRepository;
 import co.com.sofkau.horseraces.usecases.game.commands.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,9 @@ public class GameController {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private PodiumRepository podiumRepository;
+
     @PostMapping(value = "creategame")
     public ResponseEntity<String> createGame(@RequestBody CreateGame command) {
         var useCase = new CreateGameUseCase();
@@ -49,7 +53,8 @@ public class GameController {
     @PostMapping(value = "choosehorse")
     public ResponseEntity<Player> chooseHorse(@RequestBody ChooseHorse command) {
         var useCase = new ChooseHorseUseCase();
-        return new ResponseEntity(useCase.apply(playerRepository, horseRepository, command), HttpStatus.OK);
+        return new ResponseEntity(useCase.apply(playerRepository, horseRepository, command)
+                , HttpStatus.OK);
     }
 
     @PostMapping(value = "addtrack")
@@ -61,12 +66,21 @@ public class GameController {
     @PostMapping(value = "preparegame")
     public ResponseEntity<Game> prepareGame(@RequestBody PrepareGame command) {
         var useCase = new PrepareGameUseCase();
-        return new ResponseEntity(useCase.apply(gameRepository, playerRepository, command), HttpStatus.OK);
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository, command)
+                , HttpStatus.OK);
     }
 
     @PostMapping(value = "runrace")
     public ResponseEntity<Game> runRace(@RequestBody RunRace command) {
         var useCase = new RunRaceUseCase();
-        return new ResponseEntity(useCase.apply(gameRepository, command), HttpStatus.OK);
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "dorematch")
+    public ResponseEntity<Game> doRematch(@RequestBody DoRematch command) {
+        var useCase = new DoRematchUseCase();
+        return new ResponseEntity(useCase.apply(gameRepository, playerRepository
+                , podiumRepository, command), HttpStatus.OK);
     }
 }

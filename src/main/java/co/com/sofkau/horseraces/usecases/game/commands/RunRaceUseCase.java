@@ -9,11 +9,15 @@ import co.com.sofkau.horseraces.domain.game.Lane;
 import co.com.sofkau.horseraces.domain.game.Player;
 import co.com.sofkau.horseraces.domain.game.commands.RunRace;
 import co.com.sofkau.horseraces.repositories.GameRepository;
+import co.com.sofkau.horseraces.repositories.PlayerRepository;
+import co.com.sofkau.horseraces.repositories.PodiumRepository;
 
 import java.util.Optional;
 
 public class RunRaceUseCase{
-    public Object apply(GameRepository gameRepository, RunRace command) {
+    public Object apply(GameRepository gameRepository, PlayerRepository playerRepository,
+                        PodiumRepository podiumRepository, RunRace command) {
+        SetPodiumUseCase setPodiumUseCase = new SetPodiumUseCase();
         Optional<Game> optionalEntity = gameRepository.findById(command.getGameId());
 
         if (optionalEntity.isPresent()&&optionalEntity.get().getActualState().equals("PREPARED")) {
@@ -23,9 +27,11 @@ public class RunRaceUseCase{
                 iterable.run();
             }
             game.setActualState("RUNNING");
+            gameRepository.save(game);
+            game= (Game) setPodiumUseCase.apply(gameRepository,playerRepository,podiumRepository,game);
             return Optional.of(gameRepository.save(game));
         } else {
-            throw new NullPointerException("The referenced game doesn't exist");
+            throw new NullPointerException("The referenced game doesn't exist or the game is not PREPARED");
         }
     }
 
